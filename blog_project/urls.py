@@ -20,4 +20,6 @@ import blog.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog.views.home, name="home"),
+    path('blog/<int:blog_id>', blog.views.detail, name="detail"),
+    # path converter : 여러 객체들을 다루는, 계층적인 url을 자동생성할 때 유리함
 ]
