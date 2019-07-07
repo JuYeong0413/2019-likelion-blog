@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import blog.views
+import portfolio.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     # path converter : 여러 객체들을 다루는, 계층적인 url을 자동생성할 때 유리함
     path('blog/new/', blog.views.new, name="new"),
     path('blog/create/', blog.views.create, name="new"),
+    path('portfolio/', portfolio.views.portfolio, name="portfolio"),
 ]
