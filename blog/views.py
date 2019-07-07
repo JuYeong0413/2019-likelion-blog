@@ -19,7 +19,7 @@ def detail(request, blog_id):
 
 # new.html 띄워주는 함수
 def new(request):
-    return render(request, 'blog/new.html', name="new")
+    return render(request, 'blog/new.html')
 
 
 # 입력받은 내용을 데이터베이스에 넣어주는 함수
