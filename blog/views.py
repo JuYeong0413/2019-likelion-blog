@@ -11,6 +11,6 @@ def home(request):
 
 
 def detail(request, blog_id):
-    blog_detail = get_object_or_404(Blog, pk=blog_id)
+    blog_detail = get_object_or_404(Blog, pk = blog_id) # pk = primary key : 객체들의 이름표, 구분자, 데이터의 대표값
 
     return render(request, 'blog/detail.html', {'blog': blog_detail})
