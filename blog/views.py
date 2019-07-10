@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator
 from .models import Blog
-from .form import BlogPost
+from .forms import BlogPost
 
 # Create your views here.
 def home(request):
