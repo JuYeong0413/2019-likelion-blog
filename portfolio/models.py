@@ -5,6 +5,7 @@ class Portfolio(models.Model):
     title = models.CharField(max_length = 255)
     image = models.ImageField(upload_to='images/')
     description = models.CharField(max_length=500)
+    date = models.DateField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
         return self.title
