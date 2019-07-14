@@ -9,7 +9,7 @@ def home(request):
     blogs = Blog.objects # 쿼리셋 # 메소드
 
     # 블로그 모든 글들을 대상으로
-    blog_list = Blog.objects.all()
+    blog_list = Blog.objects.order_by('-id')
     # 블로그 객체 세 개를 한 페이지로 자르기
     paginator = Paginator(blog_list, 3)
     # request된 페이지가 뭔지를 알아내고 (request 페이지를 변수에 담아내고)
@@ -37,10 +37,11 @@ def new(request):
 # 입력받은 내용을 데이터베이스에 넣어주는 함수
 def create(request):
     if request.method == "POST":
+        user = request.user
         title = request.POST.get('title')
         body = request.POST.get('body')
         pub_date = timezone.datetime.now()
-        blog = Blog(title=title, body=body, pub_date=pub_date)
+        blog = Blog(title=title, body=body, pub_date=pub_date, writer=user)
         blog.save()
 
     # return redirect('/blog/'+str(blog.id))
@@ -60,3 +61,27 @@ def blogpost(request):
     else:
         form = BlogPost() # 빈 객체의 form 탄생
         return render(request, 'blog/new.html', {'form': form})
+
+
+def delete(request, id):
+    post = get_object_or_404(Blog, pk=id)
+    post.delete()
+    return redirect('home')
+
+def edit(request, id):
+    post = get_object_or_404(Blog, pk=id)
+    return render(request, 'blog/edit.html', {'post': post})
+
+
+def update(request, id):
+    if request.method == 'POST':
+        post = get_object_or_404(Blog, pk=id)
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        pub_date = timezone.datetime.now()
+        post.title = title
+        post.body = body
+        post.pub_date = pub_date
+        post.save()
+
+    return redirect('detail', id)
